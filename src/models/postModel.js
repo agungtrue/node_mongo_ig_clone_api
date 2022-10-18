@@ -9,22 +9,19 @@ const postSchema = new mongoose.Schema({
         required: [true, 'a post must have a title'],
         trim: true,
     },
-    body: {
-        type: String,
-        // required: [true, 'a post must have a body'],
-        trim: true,
-        // unique: true
-        default: '',
-    },
     photo: {
         type: String,
         trim: true,
-        // required: [true, 'a post must have a photo']
+        required: [true, 'a post must have a photo']
     },
-    likes: {
-        type: Array,
-        ref: 'Users'
-    },
+    likes: [
+        {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'Users'
+            }
+        }
+    ],
     comments: [
         {
             text: String,
