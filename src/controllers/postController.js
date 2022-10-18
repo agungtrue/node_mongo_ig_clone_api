@@ -43,7 +43,10 @@ exports.updatePost = CatchAsync(async (req, res, next) => {
 });
 
 exports.getAllPosts = CatchAsync(async (req, res, next) => {
-    const doc = await Post.find().populate(['postedBy', 'likes.user', 'comments.commentBy']);
+    const doc = await Post.find()
+        .populate(['postedBy', 'likes.user', 'comments.commentBy'])
+        .sort({ createdAt: -1 });
+
 
     res.status(httpStatus.OK).json({ 
         status: 'OK', 
