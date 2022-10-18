@@ -36,11 +36,8 @@ const postSchema = new mongoose.Schema({
         ref: 'Users',
         required: [true, 'a post must have a user'],
     },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    }
-});
+},
+{ timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
 
