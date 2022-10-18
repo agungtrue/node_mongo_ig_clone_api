@@ -10,7 +10,7 @@ exports.signup = (req, res, next) => {
         name: 'required|string|min:3',
         email: 'required|email',
         password: 'required|string|min:8',
-        passwordConfirm: 'required|string|min:3',
+        passwordConfirm: 'required|string|min:8',
     };
 
     // other logic
@@ -18,6 +18,7 @@ exports.signup = (req, res, next) => {
         next(new AppError('password confirm are not same!', httpStatus.BAD_REQUEST));
         return res.status(httpStatus.BAD_REQUEST).json({
             status: "BAD_REQUEST",
+            message: 'password confirm are not same!',
             errors: {
                 password: ['password confirm are not same!']
             }
@@ -30,7 +31,8 @@ exports.signup = (req, res, next) => {
     if (!validator.validate()) {
         return res.status(httpStatus.BAD_REQUEST).json({
             status: "BAD_REQUEST",
-            errors: validator.errors().all()
+            errors: validator.errors().all(),
+            message: 'The password confirm must be at least 8 characters.',
         });
     };
 
